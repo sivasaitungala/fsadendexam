@@ -1,0 +1,30 @@
+package com.klef.fsad.exam;
+
+import org.hibernate.*;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
+
+import java.util.Date;
+
+public class ClientDemo {
+    public static void main(String[] args) {
+
+        SessionFactory sf = new Configuration().configure().buildSessionFactory();
+        Session session = sf.openSession();
+        Transaction tx = session.beginTransaction();
+
+        // INSERT
+        Delivery d = new Delivery(1, "Package1", new Date(), "Delivered");
+        session.save(d);
+
+        // DELETE using HQL
+        Query q = session.createQuery("delete from Delivery where id=?0");
+        q.setParameter(0, 1);
+        q.executeUpdate();
+
+        tx.commit();
+
+        session.close();
+        sf.close();
+    }
+}
