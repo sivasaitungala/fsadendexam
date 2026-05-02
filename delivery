@@ -1,0 +1,30 @@
+package com.klef.fsad.exam;
+
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
+@Table(name = "delivery")
+public class Delivery {
+
+    @Id
+    private int id;
+
+    private String name;
+
+    @Temporal(TemporalType.DATE)
+    private Date date;
+
+    private String status;
+
+    public Delivery() {}
+
+    public Delivery(int id, String name, Date date, String status) {
+        this.id = id;
+        this.name = name;
+        this.date = date;
+        this.status = status;
+    }
+
+    // getters and setters
+}
